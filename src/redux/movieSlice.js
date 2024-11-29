@@ -2,12 +2,16 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-    searchQuery : '',
-    searchResult : [],
-    favorites : [],
-    loading : false,
-    error : null
-}
+  searchQuery: "",
+  searchResult: [],
+  favorites: [],
+  loading: false,
+  error: null,
+  famousMovies:[],
+  famousTVSeries:[]
+};
+
+
 const movieSlice = createSlice({
   name: "movies",
   initialState,
@@ -30,8 +34,19 @@ const movieSlice = createSlice({
     clearSearchResult: (state) => {
       state.searchResult = []; 
     },
+    setFamousMovies: (state,action) => {
+      state.famousMovies = action.payload || [];
+
+      console.log(action.payload)
+    },
+    setFamousTvSeries: (state,action) => {
+      state.famousTVSeries = action.payload || [];
+      
+    }
+  
   },
 });
+  
 
 export const {
   setSearchQuery,
@@ -40,6 +55,8 @@ export const {
   setLoading,
   setError,
   clearSearchResult,
+  setFamousMovies,
+  setFamousTvSeries,
 } = movieSlice.actions;
 
 export default movieSlice.reducer

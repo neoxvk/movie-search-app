@@ -2,7 +2,8 @@ import { useEffect , useState} from "react";
 import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
-const BASE_URL = "https://www.omdbapi.com/";
+
+const BASE_URL = process.env.REACT_APP_URL;
 
 console.log(API_KEY)
 const useFetch = (query) => {
@@ -11,21 +12,20 @@ const useFetch = (query) => {
     const [error, setError] = useState(null)
 
 
-    console.log(`${BASE_URL}?s=${query}&apikey=3864b029`);
+    console.log(`ApiKey is ${BASE_URL}`);
 
     useEffect(()=> {
         //For edge case
         if(!query) return;
 
-        console.log("API key", API_KEY)
+        console.log("API key 2", API_KEY)
 
         const fetchMovies = async() => {
             setLoading(true);
             setError(null)
                try {
                  const response = await axios.get(
-                   ` https://www.omdbapi.com/?s=${query}&apikey=3864b029`
-                   //    `${BASE_URL}?s=${query}&apikey=3864b029`
+                      `https://www.omdbapi.com/?s=${query}&apikey=3864b029`
                  );
                   setData(response.data.Search || []);
                } catch (e) {
